@@ -1,6 +1,6 @@
 Name:           vamp-plugin-sdk
 Version:        1.1b
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
@@ -8,6 +8,7 @@ License:        BSD
 URL:            http://www.vamp-plugins.org/
 Source0:        http://downloads.sourceforge.net/vamp/vamp-plugin-sdk-%{version}.tar.gz
 Patch0:         %{name}-1.1b-Makefile.patch
+Patch1:         %{name}-1.1b-gcc43.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libsndfile-devel
@@ -40,6 +41,7 @@ developing static applications that use %{name}.
 %prep
 %setup -q -n %{name}-v%{version}
 %patch0 -p1 -b .mk
+%patch1 -p1 -b .gcc43
 
 
 %build
@@ -96,6 +98,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jan 31 2008 Michel Salim <michel.sylvan@gmail.com> - 1.1b-4
+- Add some #includes, needed due to GCC 4.3's header dependency cleanup
+
 * Mon Jan 28 2008 Michel Salim <michel.sylvan@gmail.com> - 1.1b-3
 - Add examples to -devel subpackage
 - Fix .pc files
