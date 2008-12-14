@@ -1,0 +1,22 @@
+--- vamp-plugin-sdk-2.0/Makefile.in.libdir	2008-12-01 06:48:41.000000000 -0500
++++ vamp-plugin-sdk-2.0/Makefile.in	2008-12-14 17:04:13.000000000 -0500
+@@ -71,8 +71,8 @@
+ INSTALL_API_HEADERS	  := $(INSTALL_PREFIX)/include/vamp
+ INSTALL_SDK_HEADERS	  := $(INSTALL_PREFIX)/include/vamp-sdk
+ INSTALL_HOSTSDK_HEADERS	  := $(INSTALL_PREFIX)/include/vamp-hostsdk
+-INSTALL_SDK_LIBS	  := $(INSTALL_PREFIX)/lib
+-INSTALL_PLUGINS		  := $(INSTALL_PREFIX)/lib/vamp
++INSTALL_SDK_LIBS	  := @libdir@
++INSTALL_PLUGINS		  := $(INSTALL_SDK_LIBS)/vamp
+ INSTALL_BINARIES	  := $(INSTALL_PREFIX)/bin 
+ 
+ INSTALL_SDK_LIBNAME	  := libvamp-sdk.so.2.0.0
+@@ -87,7 +87,7 @@
+ INSTALL_HOSTSDK_STATIC    := libvamp-hostsdk.a
+ INSTALL_HOSTSDK_LA        := libvamp-hostsdk.la
+ 
+-INSTALL_PKGCONFIG	  := $(INSTALL_PREFIX)/lib/pkgconfig
++INSTALL_PKGCONFIG	  := $(INSTALL_SDK_LIBS)/pkgconfig
+ 
+ # Flags required to tell the compiler to create a dynamically loadable object
+ #

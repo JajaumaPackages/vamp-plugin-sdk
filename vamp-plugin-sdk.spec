@@ -1,5 +1,5 @@
 Name:           vamp-plugin-sdk
-Version:        1.3
+Version:        2.0
 Release:        1%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
@@ -7,7 +7,7 @@ Group:          System Environment/Libraries
 License:        BSD
 URL:            http://www.vamp-plugins.org/
 Source0:        http://downloads.sourceforge.net/vamp/vamp-plugin-sdk-%{version}.tar.gz
-Patch0:         %{name}-1.3-mk.patch
+Patch0:         %{name}-2.0-libdir.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libsndfile-devel
@@ -39,18 +39,19 @@ developing static applications that use %{name}.
 
 %prep
 %setup -q
-%patch0 -p1 -b .mk
+%patch0 -p1 -b .libdir
 
 
 %build
-CXXFLAGS=$RPM_OPT_FLAGS make %{?_smp_mflags}
+%configure
+make %{?_smp_mflags}
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 # fix libdir
 find . -name '*.pc.in' -exec sed -i 's|/lib|/%{_lib}|' {} ';'
-make install DESTDIR=$RPM_BUILD_ROOT INSTALL_PREFIX=%{_prefix} LIB=/%{_lib}
+make install DESTDIR=$RPM_BUILD_ROOT
 
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
@@ -82,10 +83,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc COPYING README
 %{_libdir}/*.so.*
+%{_libdir}/vamp
 
 %files devel
 %defattr(-,root,root,-)
 %doc examples
+%{_bindir}/vamp-*
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
@@ -96,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Dec 14 2008 Michel Salim <salimma@fedoraproject.org> - 2.0-1
+- Update to 2.0
+
 * Thu Jul 17 2008 Michel Alexandre Salim <salimma@fedoraproject.org> - 1.3-1
 - Update to 1.3
 
