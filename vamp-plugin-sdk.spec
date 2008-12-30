@@ -1,6 +1,6 @@
 Name:           vamp-plugin-sdk
 Version:        2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
@@ -40,6 +40,7 @@ developing static applications that use %{name}.
 %prep
 %setup -q
 %patch0 -p1 -b .libdir
+sed -i 's|/lib/vamp|/%{_lib}/vamp|g' src/vamp-hostsdk/PluginHostAdapter.cpp
 
 
 %build
@@ -51,7 +52,7 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 # fix libdir
 find . -name '*.pc.in' -exec sed -i 's|/lib|/%{_lib}|' {} ';'
-make install DESTDIR=$RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT #INSTALL_PREFIX=%{_prefix} LIB=/%{_lib}
 
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
@@ -99,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Dec 30 2008 Michel Salim <salimma@fedoraproject.org> - 2.0-2
+- More libdir fixes (bug #469777)
+
 * Sun Dec 14 2008 Michel Salim <salimma@fedoraproject.org> - 2.0-1
 - Update to 2.0
 
