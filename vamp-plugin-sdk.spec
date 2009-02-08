@@ -1,6 +1,6 @@
 Name:           vamp-plugin-sdk
 Version:        2.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
@@ -8,6 +8,7 @@ License:        BSD
 URL:            http://www.vamp-plugins.org/
 Source0:        http://downloads.sourceforge.net/vamp/vamp-plugin-sdk-%{version}.tar.gz
 Patch0:         %{name}-2.0-libdir.patch
+Patch1:         %{name}-2.0-gcc44.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libsndfile-devel
@@ -40,6 +41,7 @@ developing static applications that use %{name}.
 %prep
 %setup -q
 %patch0 -p1 -b .libdir
+%patch1 -p1 -b .gcc44
 sed -i 's|/lib/vamp|/%{_lib}/vamp|g' src/vamp-hostsdk/PluginHostAdapter.cpp
 
 
@@ -100,6 +102,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Feb  8 2009 Michel Salim <salimma@fedoraproject.org> - 2.0-3
+- Fix compilation problem with GCC 4.4
+
 * Tue Dec 30 2008 Michel Salim <salimma@fedoraproject.org> - 2.0-2
 - More libdir fixes (bug #469777)
 

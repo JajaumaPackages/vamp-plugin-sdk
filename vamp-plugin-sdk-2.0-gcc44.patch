@@ -1,0 +1,10 @@
+--- vamp-plugin-sdk-2.0/examples/FixedTempoEstimator.cpp.gcc44	2008-12-01 06:48:41.000000000 -0500
++++ vamp-plugin-sdk-2.0/examples/FixedTempoEstimator.cpp	2009-02-08 00:31:38.751861057 -0500
+@@ -44,6 +44,7 @@
+ using Vamp::RealTime;
+ 
+ #include <cmath>
++#include <cstdio>
+ 
+ 
+ class FixedTempoEstimator::D
