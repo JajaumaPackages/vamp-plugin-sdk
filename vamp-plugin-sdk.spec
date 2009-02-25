@@ -1,6 +1,6 @@
 Name:           vamp-plugin-sdk
 Version:        2.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
@@ -102,6 +102,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
 * Sun Feb  8 2009 Michel Salim <salimma@fedoraproject.org> - 2.0-3
 - Fix compilation problem with GCC 4.4
 
