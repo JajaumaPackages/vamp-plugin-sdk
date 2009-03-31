@@ -1,6 +1,6 @@
 Name:           vamp-plugin-sdk
 Version:        2.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
@@ -43,6 +43,7 @@ developing static applications that use %{name}.
 %patch0 -p1 -b .libdir
 %patch1 -p1 -b .gcc44
 sed -i 's|/lib/vamp|/%{_lib}/vamp|g' src/vamp-hostsdk/PluginHostAdapter.cpp
+sed -i 's|/lib/|/%{_lib}/|g' src/vamp-hostsdk/PluginLoader.cpp
 
 
 %build
@@ -71,6 +72,12 @@ echo clean: >> Makefile
 echo -e "\t"-rm *.o *.so >> Makefile
 # clean directory up so we can package the sources
 make clean
+
+
+%check
+# Scan shared libs for unpatched '/lib' strings to prevent issues
+# on 64-bit multilib platforms.
+[ $(strings ${RPM_BUILD_ROOT}%{_libdir}/lib*.so.?|grep /lib|sed -e 's!/%{_lib}!/__FEDORA-LIB__!g'|grep -c /lib) -eq 0 ]
 
 
 %clean
@@ -102,6 +109,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Mar 31 2009 Michael Schwendt <mschwendt@fedoraproject.org> - 2.0-5
+- Add another sed libdir fix for PluginLoader.cpp (#469777)
+  plus a check section to scan for libdir issues
+
 * Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
