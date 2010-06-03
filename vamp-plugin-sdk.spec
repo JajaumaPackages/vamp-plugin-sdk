@@ -1,13 +1,13 @@
 Name:           vamp-plugin-sdk
-Version:        2.0
-Release:        6%{?dist}
+Version:        2.1
+Release:        1%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
 License:        BSD
 URL:            http://www.vamp-plugins.org/
 Source0:        http://downloads.sourceforge.net/vamp/vamp-plugin-sdk-%{version}.tar.gz
-Patch0:         %{name}-2.0-libdir.patch
+Patch0:         %{name}-2.1-libdir.patch
 Patch1:         %{name}-2.0-gcc44.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -61,7 +61,7 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 # create Makefile for examples
 cd examples
-echo CXXFLAGS=$RPM_OPT_FLAGS -fpic >> Makefile
+echo CXXFLAGS=$RPM_OPT_FLAGS -fpic >> Makefile-%{_arch}
 echo bundle: `ls *.o` >> Makefile
 echo -e "\t"g++ \$\(CXXFLAGS\) -shared -Wl,-Bsymbolic \
      -o vamp-example-plugins.so \
@@ -109,6 +109,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri May 28 2010 Michel Salim <salimma@fedoraproject.org> - 2.1-1
+- Update to 2.1
+- multilib fix: Makefile for examples is now arch-tagged
+
 * Sun Jul 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
