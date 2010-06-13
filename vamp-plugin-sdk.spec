@@ -7,7 +7,9 @@ Group:          System Environment/Libraries
 License:        BSD
 URL:            http://www.vamp-plugins.org/
 Source0:        http://downloads.sourceforge.net/vamp/vamp-plugin-sdk-%{version}.tar.gz
+# https://sourceforge.net/tracker/?func=detail&aid=1884043&group_id=192001&atid=939644
 Patch0:         %{name}-2.1-libdir.patch
+# https://sourceforge.net/tracker/?func=detail&aid=1884030&group_id=192001&atid=939644
 Patch1:         %{name}-2.0-gcc44.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
