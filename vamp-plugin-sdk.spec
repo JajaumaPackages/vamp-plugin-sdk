@@ -1,6 +1,6 @@
 Name:           vamp-plugin-sdk
-Version:        2.1
-Release:        2%{?dist}
+Version:        2.2.1
+Release:        1%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
@@ -8,9 +8,7 @@ License:        BSD
 URL:            http://www.vamp-plugins.org/
 Source0:        http://downloads.sourceforge.net/vamp/vamp-plugin-sdk-%{version}.tar.gz
 # https://sourceforge.net/tracker/?func=detail&aid=1884043&group_id=192001&atid=939644
-Patch0:         %{name}-2.1-libdir.patch
-# https://sourceforge.net/tracker/?func=detail&aid=1884030&group_id=192001&atid=939644
-Patch1:         %{name}-2.0-gcc44.patch
+Patch0:         %{name}-v2.2.1-libdir.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libsndfile-devel
@@ -41,9 +39,8 @@ developing static applications that use %{name}.
 
 
 %prep
-%setup -q
+%setup -q -n %{name}-v%{version}
 %patch0 -p1 -b .libdir
-%patch1 -p1 -b .gcc44
 sed -i 's|/lib/vamp|/%{_lib}/vamp|g' src/vamp-hostsdk/PluginHostAdapter.cpp
 sed -i 's|/lib/|/%{_lib}/|g' src/vamp-hostsdk/PluginLoader.cpp
 
@@ -111,6 +108,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jul 14 2011 Michel Salim <salimma@fedoraproject.org> - 2.2.1-1
+- Update to 2.2.1
+
 * Mon Feb 07 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
