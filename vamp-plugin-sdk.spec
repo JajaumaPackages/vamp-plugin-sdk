@@ -1,15 +1,14 @@
 Name:           vamp-plugin-sdk
-Version:        2.2.1
-Release:        4%{?dist}
+Version:        2.4
+Release:        1%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
 License:        BSD
 URL:            http://www.vamp-plugins.org/
-Source0:        http://downloads.sourceforge.net/vamp/vamp-plugin-sdk-%{version}.tar.gz
+Source0:        http://code.soundsoftware.ac.uk/attachments/download/517/vamp-plugin-sdk-2.4.tar.gz
 # https://sourceforge.net/tracker/?func=detail&aid=1884043&group_id=192001&atid=939644
-Patch0:         %{name}-v2.2.1-libdir.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch0:         %{name}-2.4-libdir.patch
 
 BuildRequires:  libsndfile-devel
 #Requires:
@@ -39,7 +38,7 @@ developing static applications that use %{name}.
 
 
 %prep
-%setup -q -n %{name}-v%{version}
+%setup -q
 %patch0 -p1 -b .libdir
 sed -i 's|/lib/vamp|/%{_lib}/vamp|g' src/vamp-hostsdk/PluginHostAdapter.cpp
 sed -i 's|/lib/|/%{_lib}/|g' src/vamp-hostsdk/PluginLoader.cpp
@@ -51,7 +50,6 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 # fix libdir
 find . -name '*.pc.in' -exec sed -i 's|/lib|/%{_lib}|' {} ';'
 make install DESTDIR=$RPM_BUILD_ROOT #INSTALL_PREFIX=%{_prefix} LIB=/%{_lib}
@@ -108,6 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Sep  9 2012 Michel Salim <salimma@fedoraproject.org> - 2.4-1
+- Update to 2.4
+
 * Sun Jul 22 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
