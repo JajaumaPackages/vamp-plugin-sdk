@@ -1,6 +1,6 @@
---- vamp-plugin-sdk-2.4/Makefile.in.libdir	2012-07-12 20:59:34.000000000 +0700
-+++ vamp-plugin-sdk-2.4/Makefile.in	2012-09-10 15:33:15.803174097 +0700
-@@ -71,8 +71,8 @@
+--- vamp-plugin-sdk-2.5/Makefile.in.libdir	2013-05-08 16:36:02.000000000 +0700
++++ vamp-plugin-sdk-2.5/Makefile.in	2013-06-19 18:11:42.065277534 +0700
+@@ -73,8 +73,8 @@
  INSTALL_API_HEADERS	  = $(INSTALL_PREFIX)/include/vamp
  INSTALL_SDK_HEADERS	  = $(INSTALL_PREFIX)/include/vamp-sdk
  INSTALL_HOSTSDK_HEADERS	  = $(INSTALL_PREFIX)/include/vamp-hostsdk
@@ -10,8 +10,8 @@
 +INSTALL_PLUGINS		  = $(INSTALL_SDK_LIBS)/vamp
  INSTALL_BINARIES	  = $(INSTALL_PREFIX)/bin 
  
- INSTALL_SDK_LIBNAME	  = libvamp-sdk.so.2.4.0
-@@ -87,7 +87,7 @@
+ INSTALL_SDK_LIBNAME	  = libvamp-sdk.so.2.5.0
+@@ -89,7 +89,7 @@
  INSTALL_HOSTSDK_STATIC    = libvamp-hostsdk.a
  INSTALL_HOSTSDK_LA        = libvamp-hostsdk.la
  

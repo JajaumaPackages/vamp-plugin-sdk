@@ -1,14 +1,14 @@
 Name:           vamp-plugin-sdk
-Version:        2.4
-Release:        2%{?dist}
+Version:        2.5
+Release:        1%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
 License:        BSD
 URL:            http://www.vamp-plugins.org/
-Source0:        http://code.soundsoftware.ac.uk/attachments/download/517/vamp-plugin-sdk-2.4.tar.gz
+Source0:        http://code.soundsoftware.ac.uk/attachments/download/690/vamp-plugin-sdk-2.5.tar.gz
 # https://sourceforge.net/tracker/?func=detail&aid=1884043&group_id=192001&atid=939644
-Patch0:         %{name}-2.4-libdir.patch
+Patch0:         %{name}-2.5-libdir.patch
 
 BuildRequires:  libsndfile-devel
 #Requires:
@@ -106,6 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jun 18 2013 Michel Salim <salimma@fedoraproject.org> - 2.5-1
+- Update to 2.5
+
 * Fri Feb 15 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
