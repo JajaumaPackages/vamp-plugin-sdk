@@ -87,13 +87,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING README
 %{_libdir}/*.so.*
 %{_libdir}/vamp
 
 %files devel
-%defattr(-,root,root,-)
 %doc examples
 %{_bindir}/vamp-*
 %{_includedir}/*
@@ -101,7 +99,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/*.pc
 
 %files static
-%defattr(-,root,root,-)
 %{_libdir}/*.a
 
 
