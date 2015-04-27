@@ -1,6 +1,6 @@
 Name:           vamp-plugin-sdk
 Version:        2.5
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        An API for audio analysis and feature extraction plugins
 
 Group:          System Environment/Libraries
@@ -103,6 +103,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Apr 27 2015 Nils Philippsen <nils@redhat.com> - 2.5-6
+- Rebuild for gcc 5.1.0 C++ ABI change
+
 * Wed Apr 1 2015 Orion Poplawski <orion@cora.nwra.com> - 2.5-5
 - Rebuild for gcc 5.0.0 C++ ABI change
 
